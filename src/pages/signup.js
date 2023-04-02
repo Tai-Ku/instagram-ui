@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import FirebaseContext from "../context/firebase";
 import * as ROUTES from "../constants/routes";
-
+import { doesUsernameExist } from "../services/fribase";
 export default function SingUp({ children, ...restProps }) {
   const nevigate = useNavigate();
   const { firebase } = useContext(FirebaseContext);
@@ -16,8 +16,38 @@ export default function SingUp({ children, ...restProps }) {
   const isInvalid = "";
   const handleSignUp = async (e) => {
     e.preventDefault();
-    try {
-    } catch (error) {}
+    const userNameExists = await doesUsernameExist(userName);
+    if (!userNameExists) {
+      try {
+        const createdUserResult = await firebase
+          .auth()
+          .createUserWithEmailAndPassword(emailAddress, password);
+
+        // authentication
+        // -> emailAddress & password & username (displayName)
+
+        await createdUserResult.user.updateProfile({ display: userName });
+
+        // firebase user collection (create a document)
+        await firebase.firestore().collection("users").add({
+          userId: createdUserResult.user.uid,
+          username: userName.toLowerCase(),
+          fullName,
+          emailAddress: emailAddress.toLowerCase(),
+          dateCreated: Date.now(),
+        });
+        nevigate(ROUTES.DASBOARD);
+      } catch (error) {
+        setEmailAddress("");
+        setFullName("");
+        setPassword("");
+        setUserName("");
+        setError(error.message);
+      }
+    } else {
+      setUserName("");
+      setError("That username is already taken, please try another.");
+    }
   };
   useEffect(() => {
     document.title = "SignUp - instagram";
