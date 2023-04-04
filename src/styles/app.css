@@ -654,3 +654,11 @@ video {
 .opacity-50 {
   opacity: 0.5;
 }
+
+
+.gap-4 {
+  gap: 1rem;
+}
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}

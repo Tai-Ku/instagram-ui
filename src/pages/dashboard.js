@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Timeline from "../components/timeline";
 import Header from "../components/header";
-import Sidebar from "../components/sidebar";
+import Sidebar from "../components/sidebar/index";
 export default function DashBoard() {
   useEffect(() => {
     document.title = "Instagram";
@@ -9,7 +9,7 @@ export default function DashBoard() {
   return (
     <div className="bg-gray-background">
       <Header />
-      <div className="grid">
+      <div className="grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg">
         <Timeline />
         <Sidebar />
       </div>

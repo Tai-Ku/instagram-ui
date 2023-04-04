@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import * as ROUTES from "./constants/routes";
 import useAuthListener from "./hooks/use-auth-listener";
 import UserConText from "./context/user";
+
 import "./styles/app.css";
 // import Login from "./pages/login";
 const Login = lazy(() => import("./pages/login"));
@@ -11,7 +12,6 @@ const NotFound = lazy(() => import("./pages/not-found"));
 const DashBoard = lazy(() => import("./pages/dashboard"));
 function App() {
   const { user } = useAuthListener();
-  console.log(user);
   return (
     <UserConText.Provider value={{ user }}>
       <Router>

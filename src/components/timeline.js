@@ -1,6 +1,6 @@
 function Timeline() {
   return (
-    <div className="flex justify-center">
+    <div className="  ">
       <p>I am Timeline</p>
     </div>
   );

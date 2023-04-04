@@ -8,8 +8,6 @@ import { Link } from "react-router-dom";
 function Header() {
   const { firebase } = useContext(FirebaseContext);
   const { user } = useContext(UserConText);
-  console.log(user);
-
   return (
     <header className="h-16 bg-white border-b border-gray-primary mb-8">
       <div className="container mx-auto max-w-screen-lg h-full">
@@ -53,7 +51,18 @@ function Header() {
                 </div>
               </>
             ) : (
-              <></>
+              <>
+                <Link to={ROUTES.LOGIN}>
+                  <button className="bg-blue-medium font-bold text-sm rounded text-white w-2 h-8">
+                    Login{" "}
+                  </button>
+                </Link>
+                <Link to={ROUTES.SINGN_UP}>
+                  <buttom className="text-blue-medium font-bold text-sm rounded w-20 h-8">
+                    Sign up{" "}
+                  </buttom>
+                </Link>
+              </>
             )}
           </div>
         </div>
