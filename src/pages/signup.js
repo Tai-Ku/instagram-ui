@@ -6,7 +6,6 @@ import { doesUsernameExist } from "../services/fribase";
 export default function SingUp({ children, ...restProps }) {
   const nevigate = useNavigate();
   const { firebase } = useContext(FirebaseContext);
-
   const [userName, setUserName] = useState("");
   const [fullName, setFullName] = useState("");
   const [emailAddress, setEmailAddress] = useState("");
